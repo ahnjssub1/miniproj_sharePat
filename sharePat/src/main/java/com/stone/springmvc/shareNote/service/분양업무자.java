@@ -37,8 +37,8 @@ public class 분양업무자  implements I분양업무자{
 		return 분양DAO.분양을찾다(분양번호);
 	}
 	@Override
-	public void 분양을변경하다(ShareNote shareNote) {
-		분양DAO.변경하다(shareNote);
+	public void 분양을변경하다(ShareNote 변경할분양) {
+		분양DAO.변경하다(변경할분양);
 	}
 	@Override
 	public void 분양을삭제하다(int 분양번호) {

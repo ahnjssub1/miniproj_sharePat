@@ -1,13 +1,13 @@
 package com.stone.springmvc.shareNote.dataservice;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,12 +27,11 @@ public class 분양DAO implements I분양DAO{
 	    try{
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	        con=DriverManager.getConnection(DBConfig.DBURL, DBConfig.ID, DBConfig.PASSWORD);        
-	        PreparedStatement 명령자=con.prepareStatement("insert into shareNote(share_title, share_contents, share_profile, share_time, writer) values(?,?,?,?,?)");
+	        PreparedStatement 명령자=con.prepareStatement("insert into shareNote(share_title, share_contents, share_profile, writer) values(?,?,?,?)");
 	        명령자.setString(1, 새분양.getShare_title());
 	        명령자.setString(2, 새분양.getShare_contents());
 	        명령자.setBytes(3, 새분양.getShare_profile());
-	        명령자.setTimestamp(4, 새분양.getShare_time());
-	        명령자.setInt(5, 새분양.getWriter().getMember_no());//작성자 회원의 번호를 준다
+	        명령자.setInt(4, 새분양.getWriter().getMember_no());//작성자 회원의 번호를 준다
 	        명령자.executeUpdate();
 	        con.close();
 	   }
@@ -47,17 +46,19 @@ public class 분양DAO implements I분양DAO{
 	    try{
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	        con=DriverManager.getConnection(DBConfig.DBURL, DBConfig.ID, DBConfig.PASSWORD);
-	        PreparedStatement 명령자=con.prepareStatement("select share_no,share_title,writer from shareNote");
+	        PreparedStatement 명령자=con.prepareStatement("select share_no,share_title, share_time,writer from shareNote");
 	        ResultSet 게시물표= 명령자.executeQuery();
 	        while(게시물표.next()) {
 	        	int no = 게시물표.getInt("share_no");
 	        	String title=게시물표.getString("share_title");
+	        	Timestamp time = 게시물표.getTimestamp("share_time");
 	        	int 작성한회원의번호 = 게시물표.getInt("writer");	        	
 	        	Member 작성한회원 = 회원DAO.찾다By회원번호(작성한회원의번호);
 	        	
 	        	ShareNote 분양=new ShareNote();
 	        	분양.setShare_no(no);
 	        	분양.setShare_title(title);
+	        	분양.setShare_time(time);
 	        	분양.setWriter(작성한회원);//주목
 	        	
 	        	수집된분양들.add(분양);
@@ -75,7 +76,6 @@ public class 분양DAO implements I분양DAO{
 	    try{
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	        con=DriverManager.getConnection(DBConfig.DBURL, DBConfig.ID, DBConfig.PASSWORD);
-	        
 	        PreparedStatement 명령자=con.prepareStatement("select share_no,share_title,share_contents,share_profile,share_time,writer from shareNote where share_no=?");
 	        명령자.setInt(1, 분양번호);
 	        ResultSet 게시물표= 명령자.executeQuery();

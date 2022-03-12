@@ -33,6 +33,11 @@ public class 스토리업무자 implements I스토리업무자 {
 	}
 	
 	@Override
+	public Story 사진찾다(int 스토리번호) {
+		return 스토리DAO.사진찾다(스토리번호);
+	}
+	
+	@Override
 	public Story 스토리을변경준비하다(int 스토리번호) {
 		return 스토리DAO.스토리을찾다And조회수증가하다(스토리번호);
 	}

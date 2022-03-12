@@ -1,6 +1,6 @@
 package com.stone.springmvc.story.common;
 
-import java.sql.Date;
+
 import java.sql.Timestamp;
 
 import org.springframework.web.multipart.MultipartFile;

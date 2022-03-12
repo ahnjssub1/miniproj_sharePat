@@ -40,6 +40,16 @@ public class 분양컨트롤러 {
 		return "shareNote/분양등록알림창";
 	}
 	
+	@GetMapping("/profile/{분양번호}")  // 예 /profile/1
+	ModelAndView 프로필사진을주다(@PathVariable("분양번호") int share_no){
+		
+		ShareNote 뷴양= 분양업무자.분양을조회하다(share_no);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("shareNote/share_profile");
+		mv.addObject("share_profile",뷴양.getShare_profile());
+		return mv;
+	}
+	
 	@GetMapping("/shareNotes")
 	public ModelAndView 분양목록을출력하다() {
 		List<ShareNote> 수집된분양들 = 분양업무자.모든분양을수집하다();
@@ -84,9 +94,9 @@ public class 분양컨트롤러 {
 	}
 	
 	@PostMapping("/shareNote/update")
-	public ModelAndView 분양을변경하다(ShareNote shareNote,HttpSession session) {
+	public ModelAndView 분양을변경하다(ShareNote 변경할분양,HttpSession session) {
 	
-		분양업무자.분양을변경하다(shareNote);
+		분양업무자.분양을변경하다(변경할분양);
 		
 		ModelAndView  mv =new ModelAndView();
 		mv.setViewName("shareNote/분양변경알림창");

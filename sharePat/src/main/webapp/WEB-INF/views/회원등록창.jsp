@@ -4,13 +4,9 @@
 <html>
 <head>
 <script type="text/javascript">
-
 function id를중복검사하다(){
 	document.querySelector("#member_id").value="";
 	window.open("/id","","width=500,height=300");
-}
-function id를받다(member_id){
-	document.querySelector("#member_id").value=member_id;
 }
 function 회원등록하다(){
 
@@ -35,31 +31,64 @@ function 회원등록하다(){
 	member_email.value=email1+"@"+email2;
 	return true;
 }
-
+function id를받다(member_id){
+	document.querySelector("#member_id").value=member_id;
+}
 </script>
+<style>
+header{
+	 margin-top: -70px;
+    padding-top: 70px;
+  	left: 0;
+	right: 0;
+	text-align: center;
+	color: white;
+	background-color: #99A799;
+	
+}
+.assignform{
+	position: absolute;
+	left: 32%;
+	text-align : left;
+}
+#tit{
+	text-align: center;
+}
+.btn{
+	margin-left: 8px;
+    border:none;
+    color: white;
+    background-color: #406254;
+    border-radius: 3px;
+}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>회원등록</h1>
-<form onsubmit="return 회원등록하다()" action="/assign" method="post"> 
+<header>
+	<h1> 유기 동물 무료 분양 </h1>
+</header>
+<div class="assignform">
+<h1 id="tit">회원등록</h1>
+<form onsubmit="return 회원등록하다()" action="/assign" method="post" class="form"> 
 
-ID*<input type="text" name="member_id" id="member_id" placeholder="myid1"/>
-     <input type="button" onclick="id를중복검사하다()" value="중복검사"/><br>
-PassWord*<input type="password" name="member_pw" id="member_pw" placeholder="testpassword1"/><br>
-성명*<input type="text" name="member_name" id="member_name" placeholder="testname1"/><br>
-E-mail<input type="text" id="email1" placeholder="email1"/>@
+ID* <input type="text" name="member_id" id="member_id" placeholder="myid1"/>
+     <input type="button" class="btn" onclick="id를중복검사하다()" value="중복검사"/><br><br>
+PassWord* <input type="password" name="member_pw" id="member_pw" placeholder="testpassword1"/><br><br>
+성명* <input type="text" name="member_name" id="member_name" placeholder="testname1"/><br><br>
+E-mail <input type="text" id="email1" placeholder="email1"/>@
       <select id="email2">
 	    <option value="naver.com">navar.com</option>
 	    <option value="daum.net">daum.net</option>
 	    <option value="gmail.com">gmail.com</option>
 	    <option value="직접">직접입력</option>
 	  </select>
-	  <input type="hidden" name="member_email" id="member_email"/><br>
-전화번호<input type="text" name="member_phone" id="member_phone" placeholder="010011112222"/><br>
+	  <input type="hidden" name="member_email" id="member_email"/><br><br>
+전화번호 <input type="text" name="member_phone" id="member_phone" placeholder="010011112222"/><br><br>
       <br>
-<input type="submit" value="등록"/>
-   
+<input type="submit" class="btn" value="등록"/>
 </form>
+</div>
 </body>
 </html>

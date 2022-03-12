@@ -33,19 +33,44 @@
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+header{
+	margin-top: -70px;
+    padding-top: 70px;
+  	left: 0;
+	right: 0;
+	text-align: center;
+	color: white;
+	background-color: #99A799;
+}
+#story_profile{
+	width: 150px;
+	height: 150px;
+}
+.btn{
+	margin-left: 8px;
+    border:none;
+    color: white;
+    background-color: #406254;
+    border-radius: 3px;
+}
+</style>
 </head>
 <body>
+<header>
+	<h1> 유기 동물 무료 분양 </h1>
+</header>
 <h1>스토리 등록</h1>
+<div class="inform">
 <form action="/story" enctype="multipart/form-data"  method="post">
  제목<input type="text" name="story_title" /> <br>
  사진 <img id="story_profile" src="/img/no_image.jpg" width="200" height="300"/><br>
      <input type="file" name="story_profileFile" id="story_profileFile"/><br> 
- 
- 내용<textarea cols="25" rows="5" name="story_contents" ></textarea><br>
- <input type="submit" value="등록" />
+  내용<textarea cols="25" rows="5" name="story_contents" ></textarea><br>
+ <input class="btn" type="submit" value="등록" />
 </form>
-<button onclick="location.href='/main'">메인</button>
-<button onclick="location.href='/member'">이전</button>
-
+<button class="btn" onclick="location.href='/main'">메인</button>
+<button class="btn" onclick="location.href='/member'">이전</button>
+</div>
 </body>
 </html>

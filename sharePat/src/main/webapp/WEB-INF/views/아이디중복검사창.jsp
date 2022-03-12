@@ -15,23 +15,37 @@ function id사용하다(){
 	close();
 }
 </script>
+<style type="text/css">
+.idch{
+	text-align: center;
+}
+.btn{
+	margin-left: 8px;
+    border:none;
+    color: white;
+    background-color: #406254;
+    border-radius: 3px;
+}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+<div class="idch">
 <h1>아이디 중복 검사</h1>
 <form action="/id" method="post"> 
 ID<input type="text" name="member_id" id="member_id" value="<%=(member_id==null)?"":member_id%>"/>
-  <input type="submit" value="검사"/>
+  <input type="submit" class="btn" value="검사"/>
 <br>
 </form>
 <% if(사용가능!=null){
 if(사용가능){ %>
-	사용 가능한 id입니다. <input type="button" onclick="id사용하다()" value="사용"/>
+	사용 가능한 id입니다. <input type="button" class="btn" onclick="id사용하다()" value="사용"/>
 <%}else{ %>
     이미 사용 중 입니다.
 <%} 
 }%>
-<input type="button" value="취소"/>
+<br><input type="button" class="btn" value="취소"/>
+</div>
 </body>
 </html>

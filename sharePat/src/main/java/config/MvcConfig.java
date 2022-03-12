@@ -14,17 +14,14 @@ import env.로그인확인자;
 @EnableWebMvc
 @ComponentScan(basePackages="com.stone")
 public class MvcConfig implements WebMvcConfigurer {
-
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		registry.jsp("/WEB-INF/views/",".jsp");
 	}
-	
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 	    registry.addResourceHandler("/img/**").addResourceLocations("/img/");
 	}
-	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new 로그인확인자())
@@ -34,10 +31,5 @@ public class MvcConfig implements WebMvcConfigurer {
 		        .excludePathPatterns("/assign")
 		        .excludePathPatterns("/profile")
 		        .excludePathPatterns("/id");
-		
-		//Test 할 것 -로그인 없이 /member 요청하면 -> 로그인 창이 뜨며 로그인을 요청함  
-		
 	}
-	
-	
 }

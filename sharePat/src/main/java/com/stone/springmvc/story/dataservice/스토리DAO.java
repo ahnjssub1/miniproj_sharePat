@@ -28,12 +28,11 @@ public class 스토리DAO implements I스토리DAO {
 	    try{
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	        con=DriverManager.getConnection(DBConfig.DBURL, DBConfig.ID, DBConfig.PASSWORD);        
-	        PreparedStatement 명령자=con.prepareStatement("insert into story(story_title,story_contents,story_profile,story_time,writer) values(?,?,?,?,?)");
+	        PreparedStatement 명령자=con.prepareStatement("insert into story(story_title,story_contents,story_profile,writer) values(?,?,?,?)");
 	        명령자.setString(1, 새스토리.getStory_title());
 	        명령자.setString(2, 새스토리.getStory_contents());
 	        명령자.setBytes(3, 새스토리.getStory_profile());
-	        명령자.setTimestamp(4, 새스토리.getStory_time());
-	        명령자.setInt(5, 새스토리.getWriter().getMember_no());//작성자 회원의 번호를 준다
+	        명령자.setInt(4, 새스토리.getWriter().getMember_no());//작성자 회원의 번호를 준다
 	        명령자.executeUpdate();
 	        con.close();
 	   }
@@ -48,12 +47,13 @@ public class 스토리DAO implements I스토리DAO {
 	    try{
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	        con=DriverManager.getConnection(DBConfig.DBURL, DBConfig.ID, DBConfig.PASSWORD);
-	        PreparedStatement 명령자=con.prepareStatement("select story_no,story_title,writer,story_views from story");
+	        PreparedStatement 명령자=con.prepareStatement("select story_no,story_title,story_time,writer,story_views from story");
 	        ResultSet 게시물표= 명령자.executeQuery();
 	        while(게시물표.next()) {
 	        	int no = 게시물표.getInt("story_no");
 	        	String title=게시물표.getString("story_title");	        
-	        	int 작성한회원의번호 = 게시물표.getInt("writer");	        	
+	        	int 작성한회원의번호 = 게시물표.getInt("writer");	  
+	        	Timestamp time = 게시물표.getTimestamp("story_time");
 	        	int views = 게시물표.getInt("story_views");
 	        	Member 작성한회원 = 회원DAO.찾다By회원번호(작성한회원의번호);
 	        	
@@ -62,6 +62,7 @@ public class 스토리DAO implements I스토리DAO {
 	        	스토리.setStory_title(title);
 	        	스토리.setWriter(작성한회원);//주목
 	        	스토리.setStory_views(views);
+	        	스토리.setStory_time(time);
 	        	
 	        	수집된스토리들.add(스토리);
 	        }
@@ -109,6 +110,41 @@ public class 스토리DAO implements I스토리DAO {
 		return 스토리;
 	}
 
+	@Override
+	public Story 사진찾다(int 스토리번호) {
+		Story 스토리 = null; 
+		Connection con = null;		 
+	    try{
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        con=DriverManager.getConnection(DBConfig.DBURL, DBConfig.ID, DBConfig.PASSWORD);
+	        
+	        PreparedStatement 명령자=con.prepareStatement("select story_no,story_title,story_contents,story_profile,story_time,writer,story_views from story where story_no=?");
+	        명령자.setInt(1, 스토리번호);
+	        ResultSet 게시물표= 명령자.executeQuery();
+	        if(게시물표.next()) {
+	        	int no = 게시물표.getInt("story_no");
+	        	String title=게시물표.getString("story_title");
+	        	String contents =게시물표.getString("story_contents");
+	        	byte[] profile=게시물표.getBytes("story_profile");
+	        	Timestamp time = 게시물표.getTimestamp("story_time");
+	        	int 작성한회원의번호 = 게시물표.getInt("writer");	        	
+	        	int views = 게시물표.getInt("story_views");
+	        	Member 작성한회원 = 회원DAO.찾다By회원번호(작성한회원의번호);
+	        	
+	        	스토리=new Story();
+	           	스토리.setStory_no(no);
+	        	스토리.setStory_title(title);
+	        	스토리.setStory_contents(contents);
+	        	스토리.setStory_profile(profile);
+	        	스토리.setStory_time(time);
+	        	스토리.setWriter(작성한회원);//주목
+	        	스토리.setStory_views(views);
+	        }
+	    }
+		catch(Exception ex){ ex.printStackTrace(); }
+		return 스토리;
+	}
+	
 	@Override
 	public void 삭제하다(int 스토리번호) {
 		Connection con = null;		 

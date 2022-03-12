@@ -5,12 +5,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+header{
+	margin-top: -70px;
+    padding-top: 70px;
+  	left: 0;
+	right: 0;
+	text-align: center;
+	color: white;
+	background-color: #99A799;
+	
+}
+.alarm{
+	text-align: center;
+}
+.btn{
+	margin-left: 8px;
+    border:none;
+    color: white;
+    background-color: #406254;
+    border-radius: 3px;
+}
+</style>
 </head>
 <body>
-<p>분양이 등록되었습니다.</p>
-
-<button onclick="location.href='/main'">메인</button>
-<button onclick="location.href='/storys'">스토리목록</button>
-
+<header>
+	<h1> 유기 동물 무료 분양 </h1>
+</header>
+<div class="alarm">
+<p>스토리가 등록되었습니다.</p>
+<button class="btn" onclick="location.href='/main'">메인</button>
+<button class="btn" onclick="location.href='/storys'">스토리목록</button>
+</div>
 </body>
 </html>

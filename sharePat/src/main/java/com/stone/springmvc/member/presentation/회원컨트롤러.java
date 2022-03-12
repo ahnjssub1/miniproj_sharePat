@@ -52,8 +52,12 @@ public class 회원컨트롤러 {
 	
 	//로그인 했어야지만 할 수 있는 요청
 	@GetMapping("/member")
-	public ModelAndView 회원자신의정보를보다() {		
+	public ModelAndView 회원자신의정보를보다(HttpSession session) {		
+		Integer 회원번호 = (Integer) session.getAttribute("회원번호");
+//		System.out.println("회원번호:" + 회원번호);
+		Member member = 회원업무자.회원정보를조회하다(회원번호);
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("member", member);
 		mv.setViewName("member/Test자기정보창");
 		return mv;
 	}

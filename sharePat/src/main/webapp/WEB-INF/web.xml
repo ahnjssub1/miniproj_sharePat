@@ -15,6 +15,7 @@
 			</param-value>	
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<!-- 사진 업로드 설정 -->
 		<multipart-config>
 			<location>/upload</location>
 			<max-file-size>5242880</max-file-size>
@@ -29,11 +30,11 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+<!-- 세션 타임아웃 설정 -->
 	<session-config>
         <session-timeout>20</session-timeout> <!--분 단위   -->
     </session-config>	
-	
+<!-- 한글 필터 설정 -->	
 	<filter>
 		 <filter-name>myencodingFilter</filter-name>
 		 <filter-class>env.MyCharsetEncodingFilter</filter-class>

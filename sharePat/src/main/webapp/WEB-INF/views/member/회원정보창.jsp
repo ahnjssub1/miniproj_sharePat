@@ -9,17 +9,38 @@
 <head>
 <meta charset="UTF-8">
 <title>각 사용자 마다의 공개가능한 정보 및 분양목록과 스토리목록 출력</title>
+<style type="text/css">
+header{
+	margin-top: -70px;
+    padding-top: 70px;
+  	left: 0;
+	right: 0;
+	text-align: center;
+	color: white;
+	background-color: #99A799;
+}
+.btn{
+	margin-left: 8px;
+    border:none;
+    color: white;
+    background-color: #406254;
+    border-radius: 3px;
+}
+</style>
 </head>
 <body>
+<header>
+	<h1> 유기 동물 무료 분양 </h1>
+</header>
 <h1>회원 정보</h1>
- ID:<%=member.getMember_id() %><br>
- E-mail:${member.member_email}<br>
+ ID: <%=member.getMember_id() %><br>
+ E-mail: ${member.member_email}<br><br>
 
  
- <button onclick="location.href='/shareNotes'">분양목록</button>
- <button onclick="location.href='/storys'">스토리목록</button>
+ <button class="btn" onclick="location.href='/shareNotes'">분양목록</button>
+ <button class="btn" onclick="location.href='/storys'">스토리목록</button>
  <br><br>
- <button onclick="location.href='/main'">메인</button>
+ <button class="btn" onclick="location.href='/main'">메인</button>
  
 </body>
 </html>
